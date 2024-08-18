@@ -1,19 +1,28 @@
-import React from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Container, Grow, Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
+
+import { getPosts } from './actions/posts';
 import memories from './images/memories.png';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
-
+import { StyledAppBar, Heading, Image } from './style';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
+
   return (
     <Container maxWidth="lg">
-      <AppBar position="static" color="inherit">
-        <Typography variant="h2" align="center">
+      <StyledAppBar position="static" color="inherit">
+        <Heading variant="h2" align="center">
           Memories
-        </Typography>
-        <img src={memories} alt="memories" height="200" />
-      </AppBar>
+        </Heading>
+        <Image src={memories} alt="memories" height="60" />
+      </StyledAppBar>
       <Grow in>
         <Container>
           <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
@@ -27,7 +36,7 @@ function App() {
         </Container>
       </Grow>
     </Container>
-  )
+  );
 }
 
-export default App
+export default App;
