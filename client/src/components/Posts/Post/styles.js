@@ -1,9 +1,12 @@
 import { styled } from "@mui/material/styles";
-import { Card, CardMedia, Button } from "@mui/material";
+import { Card, CardMedia, Typography } from "@mui/material";
 
 export const StyledCard = styled(Card)({
-  maxWidth: '100%',
-  margin: '20px 0',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  borderRadius: '15px',
+  height: '100%',
   position: 'relative',
 });
 
@@ -28,6 +31,21 @@ export const Overlay2 = styled('div')({
   color: 'white',
 });
 
-export const StyledButton = styled(Button)({
-  color: 'white',
+export const StyledCardContent = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  margin: '20px',
+});
+
+export const StyledCardActions = styled(Typography)({
+  padding: '0 16px 8px 16px',
+  display: 'flex',
+  justifyContent: 'space-between',
+});
+
+export const StyledCardTitle = styled(Typography)({
+  padding: '8px 16px 0 16px',
+  fontSize: '1.5rem',
+  fontWeight: 'bold',
+  marginBottom: '10px',
 });
