@@ -49,3 +49,10 @@ export const StyledCardTitle = styled(Typography)({
   fontWeight: 'bold',
   marginBottom: '10px',
 });
+
+export const Tags = styled(Typography)({
+  padding: '8px 16px 0 16px',
+  fontSize: '1rem',
+  fontWeight: 'bold',
+  marginBottom: '10px',
+});
