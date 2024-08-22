@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import reducers from './reducers';
 import './index.css';
+import { GoogleOAuthProvider  } from '@react-oauth/google';
 
 const store = configureStore({
   reducer: reducers,
@@ -12,12 +13,16 @@ const store = configureStore({
     getDefaultMiddleware().concat(), // You can add custom middleware here if needed
 });
 
+const googleClientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>
+    <Provider store={store}>
+      <GoogleOAuthProvider clientId={googleClientId}>
+        <React.StrictMode>  
+          <App />
+        </React.StrictMode>
+      </GoogleOAuthProvider>
+    </Provider>
 );
