@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AUTH } from '../../constants/actionTypes';
 import axios from 'axios';
+import { signin, signup } from '../../actions/auth';
 
 const Auth = () => {
     const [isSignup, setIsSignup] = useState(false);
@@ -29,12 +30,10 @@ const Auth = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Add your dispatch logic here for signup or signin
         if (isSignup) {
-            // Handle sign-up logic
+            dispatch(signup(formData, navigate));
         } else {
-            // Handle sign-in logic
+            dispatch(signin(formData, navigate));
         }
     };
 

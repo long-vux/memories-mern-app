@@ -1,5 +1,6 @@
 import * as api from '../components/api';
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+
 // action creators
 export const getPosts = () => async (dispatch) => {
     try {
@@ -36,3 +37,12 @@ export const deletePost = (id) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const likePost = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.likePost(id);
+        dispatch({ type: LIKE, payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+}

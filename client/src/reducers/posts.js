@@ -1,9 +1,10 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
 // posts reducer function
 const postsReducer = (posts = [], action) => {
     switch (action.type) {
         case UPDATE:
+        case LIKE:
             return posts.map((post) => post._id === action.payload._id ? action.payload : post);
         case FETCH_ALL:
             return action.payload;
