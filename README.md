@@ -55,7 +55,7 @@ The **Memories MERN Application** is a full-stack web application built using th
    cd client
    npm install
    ```
-##Set Up Environment Variables:
+## Set Up Environment Variables:
 Create a .env file in the backend directory with the necessary environment variables (e.g., MongoDB URI, JWT secret).
 
 5.  **Start the Front Server:**
@@ -66,6 +66,6 @@ Create a .env file in the backend directory with the necessary environment varia
    ```bash
    npm start
    ```
-##Usage
+## Usage
 - Access the application by navigating to http://localhost:3000 in your web browser.
 - Register or log in to start creating and interacting with posts.
