@@ -34,7 +34,7 @@ export const Overlay2 = styled('div')({
 export const StyledCardContent = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
-  margin: '20px',
+  margin: '0 18px',
 });
 
 export const StyledCardActions = styled(Typography)({
@@ -44,8 +44,8 @@ export const StyledCardActions = styled(Typography)({
 });
 
 export const StyledCardTitle = styled(Typography)({
-  padding: '8px 16px 0 16px',
-  fontSize: '1.5rem',
+  padding: '0 16px 0 16px',
+  fontSize: '1.3rem',
   fontWeight: 'bold',
   marginBottom: '10px',
 });

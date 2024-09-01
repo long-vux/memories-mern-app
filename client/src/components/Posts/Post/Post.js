@@ -25,33 +25,32 @@ const Post = ({ post, setCurrentId }) => {
   };
   
   return (
-    <StyledCard>
-      <StyledCardMedia image={post.selectedFile} title={post.title} />
+    <StyledCard raised elevation={6}>
+      <StyledCardMedia image={post?.selectedFile} title={post?.title} />
       <Overlay>
-        <Typography variant="h6">{post.name}</Typography>
-        <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+        <Typography variant="h6">{post?.name}</Typography>
+        <Typography variant="body2">{moment(post?.createdAt).fromNow()}</Typography>
       </Overlay>
       <Overlay2>
-      {(user?.result?._id === post?.creator || user?.result?.googleId === post?.creator) && (
-
-        <Button size="small" onClick={() => setCurrentId(post._id)}>
+        {(user?.result?._id === post?.creator || user?.result?.googleId === post?.creator) && (
+          <Button size="small" onClick={() => setCurrentId(post?._id)}>
             <MoreHoriz fontSize="default" />
           </Button>
         )}
       </Overlay2>
       <div>
-        <Tags variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Tags>
+        <Tags variant="body2" color="textSecondary">{post?.tags.map((tag) => `#${tag} `)}</Tags>
       </div>
-      <StyledCardTitle variant="h4" gutterBottom>{post.title}</StyledCardTitle>
+      <StyledCardTitle variant="h2" gutterBottom>{post?.title}</StyledCardTitle>
       <StyledCardContent>
-        <Typography gutterBottom component="p">{post.message}</Typography>
+        <Typography color="textSecondary" gutterBottom fontSize={14} >{post?.message}</Typography>
       </StyledCardContent>
       <StyledCardActions>
-        <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id, user?.result?._id))}>
+        <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post?._id, user?.result?._id))}>
           <Likes />
         </Button>
         {(user?.result?._id === post?.creator || user?.result?.googleId === post?.creator) && (
-          <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+          <Button size="small" color="primary" onClick={() => dispatch(deletePost(post?._id))}>
             <Delete fontSize="small" />
             &nbsp;Delete
           </Button>

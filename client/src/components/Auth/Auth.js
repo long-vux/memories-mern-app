@@ -6,7 +6,7 @@ import Input from './Input';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AUTH } from '../../constants/actionTypes';
+import { SIGNIN } from '../../constants/actionTypes';
 import axios from 'axios';
 import { signin, signup } from '../../actions/auth';
 
@@ -24,6 +24,12 @@ const Auth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // // Reset form data on component mount
+    // useEffect(() => {
+    //     setIsSignup(false);
+    // }, []);
+
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -31,7 +37,16 @@ const Auth = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isSignup) {
-            dispatch(signup(formData, navigate));
+            dispatch(signup(formData, navigate)).then(() => {
+                setIsSignup(false); // Switch to signin after successful signup
+                setFormData({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                });
+            });
         } else {
             dispatch(signin(formData, navigate));
         }
@@ -55,7 +70,7 @@ const Auth = () => {
                 console.log(userInfo.data);
 
                 dispatch({
-                    type: AUTH,
+                    type: SIGNIN,
                     data: {
                         result: userInfo.data,
                         token: response.access_token,

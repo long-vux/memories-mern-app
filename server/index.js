@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 import postRoutes from './routes/posts.js';
+import userRoutes from './routes/user.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(cors());
 
 // API routes
 app.use('/posts', postRoutes);
+app.use('/user', userRoutes);
 
 // Connect to MongoDB
 const CONNECTION_URL = process.env.MONGODB_URI;
