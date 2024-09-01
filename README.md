@@ -69,3 +69,5 @@ Create a .env file in the backend directory with the necessary environment varia
 ## Usage
 - Access the application by navigating to http://localhost:3000 in your web browser.
 - Register or log in to start creating and interacting with posts.
+
+Hello i'm vu
