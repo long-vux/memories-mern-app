@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyledPaper, StyledForm, FileInput, ButtonSubmit } from './styles';
 import { TextField, Typography, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
+import { getPosts } from '../../actions/posts';
 
 // @ts-ignore
 import FileBase from 'react-file-base64';
@@ -12,26 +13,28 @@ const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
     const user = JSON.parse(localStorage.getItem('profile')); 
-
+    const posts = useSelector((state) => state.posts);
+    console.log(posts);
+    
     useEffect(() => {
         if (post) setPostData(post);
     }, [post]);
 
+    const clear = useCallback(() => {
+        setPostData({ title: '', message: '', tags: '', selectedFile: '' });
+    }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = useCallback((e) => {
         e.preventDefault();
-        if(currentId) {
+        if (currentId) {
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
         } else {
             dispatch(createPost({ ...postData, name: user?.result?.name }));
         }
         clear();
         setCurrentId(null);
-    }
-
-    const clear = () => {
-        setPostData({ title: '', message: '', tags: '', selectedFile: '' });
-    }
+        dispatch(getPosts());
+    }, [currentId, dispatch, postData, user, clear, setCurrentId]);
 
     if(!user?.result?.name) return (
         <StyledPaper>

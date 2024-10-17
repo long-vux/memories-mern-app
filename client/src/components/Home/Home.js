@@ -30,10 +30,11 @@ const Home = () => {
 
     const searchPost = () => {
         if(search.trim() || tags) {
+            console.log('tags', tags)
+            // navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',') || 'none'}`);
             dispatch(getPostsBySearch({ search, tags: tags.join(',')}));
-            navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',') || 'none'}`);
+            // dispatch(getPosts());
         } else {
-            dispatch(getPosts());
             navigate('/posts');
         }
     }
@@ -53,10 +54,12 @@ const Home = () => {
                             <ChipInput
                                 variant="outlined"
                                 label="Search Tags"
+                                placeholder="Seprate by enter"
                                 fullWidth 
                                 value={tags}
                                 onAdd={(chip) => setTags([...tags, chip])}
-                                onDelete={(chip) => setTags(tags.filter((tag) => tag !== chip))}
+                                onDelete={(chip) => {setTags(tags.filter((tag) => tag !== chip)); dispatch(getPosts(page))}}
+                                onChange={(e) => setTags(e.target.value)}
                             />
                             <Button variant="contained" color="primary" onClick={searchPost}>Search</Button>
                         </StyledAppBar>

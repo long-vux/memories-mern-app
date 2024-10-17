@@ -5,12 +5,13 @@ import { StyledAppBar, Heading, Image, StyledProfile, StyledUsername } from './s
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Button, Toolbar } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { getPosts } from '../../actions/posts';
 
 const Navbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    
     const handleLogout = useCallback(() => {
         dispatch({ type: 'LOGOUT' });
         navigate('/auth');
@@ -53,7 +54,7 @@ const Navbar = () => {
     return (
         <StyledAppBar position="static" color="inherit">
             <div>
-                <Heading to="/" variant="h2" align="center">Memories</Heading>
+                <Heading component={Link} to="/" variant="h2" align="center" onClick={() => dispatch(getPosts())}>Memories</Heading>
                 <Image src={memories} alt="memories" height="50" />
             </div>
             <Toolbar>

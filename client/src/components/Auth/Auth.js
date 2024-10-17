@@ -10,7 +10,18 @@ import { SIGNIN } from '../../constants/actionTypes';
 import axios from 'axios';
 import { signin, signup } from '../../actions/auth';
 
-const Auth = () => {
+
+
+const Auth = () => { 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const isAuthenticated = JSON.parse(localStorage.getItem('profile'));
+
+    if(isAuthenticated) {
+        navigate('/');
+    }
+
     const [isSignup, setIsSignup] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
@@ -21,13 +32,13 @@ const Auth = () => {
         confirmPassword: '',
     });
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+
 
     // // Reset form data on component mount
     // useEffect(() => {
     //     setIsSignup(false);
     // }, []);
+
 
 
     const handleChange = (e) => {

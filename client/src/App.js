@@ -8,7 +8,6 @@ import Auth from './components/Auth/Auth';
 import PostDetails from './components/PostDetails/PostDetails';
 import Posts from './components/Posts/Posts';
 
-const isAuthenticated = JSON.parse(localStorage.getItem('profile'));
 
 function App() {
   return (
@@ -16,11 +15,11 @@ function App() {
       <Container maxWidth="xl">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Posts />} />
-          <Route path="/posts" element={<Home />} />
+          <Route path="/posts" element={<Posts />} />
           <Route path="/posts/search" element={<Home />} />
           <Route path="/posts/:id" element={<PostDetails />} />
-          <Route path="/auth" element={isAuthenticated ? <Home /> : <Auth />} />
+          <Route path="/auth" element={ <Auth />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Container>
     </Router>

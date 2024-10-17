@@ -1,11 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { GridContainer } from './styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CircularProgress, Grid } from '@mui/material';
 import Post from './Post/Post';
+import { getPosts } from '../../actions/posts';
 
 const Posts = ({ setCurrentId }) => {
-  const {posts, isLoading} = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
+
 
   return (
     isLoading ? <CircularProgress /> : (

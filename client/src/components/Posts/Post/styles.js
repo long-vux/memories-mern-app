@@ -15,6 +15,7 @@ export const StyledCardMedia = styled(CardMedia)({
   paddingTop: '56.25%', // 16:9 aspect ratio
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
   backgroundBlendMode: 'darken',
+  cursor: 'pointer',
 });
 
 export const Overlay = styled('div')({
@@ -48,6 +49,7 @@ export const StyledCardTitle = styled(Typography)({
   fontSize: '1.3rem',
   fontWeight: 'bold',
   marginBottom: '10px',
+  cursor: 'pointer',
 });
 
 export const Tags = styled(Typography)({

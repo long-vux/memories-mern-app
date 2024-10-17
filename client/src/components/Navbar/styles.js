@@ -20,6 +20,7 @@ const Heading = styled(Link)({
   fontWeight: 'bold',
   margin: '10px 0',
   textDecoration: 'none',
+  cursor: 'pointer',
 });
 
 const Image = styled('img')({
