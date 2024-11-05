@@ -12,6 +12,7 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
   const navigate = useNavigate();
+
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
@@ -26,9 +27,10 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const handleLike = () => {
-    dispatch(likePost(post?._id, user?.result?._id)).then(() => {
-      dispatch(getPosts()); // Re-fetch posts after liking
-    });
+    dispatch(likePost(post?._id, user?.result?._id))
+      .then(() => {
+        dispatch(getPosts()); // Re-fetch posts after liking
+      });
   };
 
   const handleDelete = () => {

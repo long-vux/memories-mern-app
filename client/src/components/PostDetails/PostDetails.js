@@ -94,14 +94,18 @@ function PostDetails() {
                                 ))}
                                 {/* Add the StyledButton as a Grid item */}
                                 <Grid item xs={12} sm={6} md={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                    <StyledButton onClick={handleAddImage}>+ Add Image</StyledButton>
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        ref={fileInputRef}
-                                        style={{ display: 'none' }}
-                                        onChange={handleImageChange}
-                                    />
+                                    {user?.result?._id === post?.creator && (
+                                        <>
+                                            <StyledButton onClick={handleAddImage}>+ Add Image</StyledButton>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                ref={fileInputRef}
+                                                style={{ display: 'none' }}
+                                                onChange={handleImageChange}
+                                            />
+                                        </>
+                                    )}
                                 </Grid>
                             </Grid>
                         </div>

@@ -3,9 +3,10 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const CONNECTION_URL = process.env.MONGODB_URI;
+const CONNECTION_URL = 'mongodb+srv://hoanglongvu233:FU8dIHuIRJdy2RpQ@cluster0.8pdk1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+// const CONNECTION_URL = 'mongodb://localhost:27017'
 
-if (!CONNECTION_URL) {
+if (!CONNECTION_URL) {  
     console.error('MONGODB_URI is not defined in .env file');
     process.exit(1);
 }

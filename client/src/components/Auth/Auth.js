@@ -1,24 +1,20 @@
 import { StyledPaper, StyledAvatar, StyledForm, StyledSubmit } from './styles';
-import { LockOutlined, Google } from '@mui/icons-material';
+import { LockOutlined } from '@mui/icons-material';
 import { Typography, Container, Grid, Button } from '@mui/material';
 import { useState } from 'react';
 import Input from './Input';
-import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { SIGNIN } from '../../constants/actionTypes';
-import axios from 'axios';
 import { signin, signup } from '../../actions/auth';
 
-
-
-const Auth = () => { 
+const Auth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [error, setError] = useState(null);
 
     const isAuthenticated = JSON.parse(localStorage.getItem('profile'));
 
-    if(isAuthenticated) {
+    if (isAuthenticated) {
         navigate('/');
     }
 
@@ -32,34 +28,43 @@ const Auth = () => {
         confirmPassword: '',
     });
 
-
-
-    // // Reset form data on component mount
-    // useEffect(() => {
-    //     setIsSignup(false);
-    // }, []);
-
-
-
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setError(null);
+
         if (isSignup) {
-            dispatch(signup(formData, navigate)).then(() => {
-                setIsSignup(false); // Switch to signin after successful signup
-                setFormData({
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password: '',
-                    confirmPassword: '',
+            dispatch(signup(formData, navigate))
+                .then((response) => {
+                    if (response.error) {
+                        setError(response.error);
+                    } else {
+                        setIsSignup(false);
+                        setFormData({
+                            firstName: '',
+                            lastName: '',
+                            email: '',
+                            password: '',
+                            confirmPassword: '',
+                        });
+                    }
+                })
+                .catch(() => {
+                    alert('Login successful, please login again');
+                    navigate('/auth');
                 });
-            });
         } else {
-            dispatch(signin(formData, navigate));
+            dispatch(signin(formData, navigate))
+                .then((response) => {
+                    if (response.error) {
+                        setError(response.error);
+                    }
+                })
+                .catch(() => {
+                });
         }
     };
 
@@ -70,31 +75,6 @@ const Auth = () => {
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
-    const login = useGoogleLogin({
-        onSuccess: async (response) => {
-            try {
-                // Fetch user info using the access token
-                const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-                    headers: { Authorization: `Bearer ${response.access_token}` },
-                });
-
-                console.log(userInfo.data);
-
-                dispatch({
-                    type: SIGNIN,
-                    data: {
-                        result: userInfo.data,
-                        token: response.access_token,
-                    },
-                });
-
-                // Navigate after successful login
-                navigate('/');
-            } catch (error) {
-                console.error('Failed to fetch user info:', error);
-            }
-        },
-    });
     return (
         <Container component="main" maxWidth="xs">
             <StyledPaper elevation={3}>
@@ -129,25 +109,23 @@ const Auth = () => {
                             />
                         )}
                     </Grid>
+                    {error && (
+                        <Typography
+                            variant="body2"
+                            color="error"
+                            sx={{
+                                marginTop: 2,
+                                fontWeight: 'bold',
+                                fontSize: '0.875rem',
+                            }}
+                        >
+                            {error}
+                        </Typography>
+                    )}
+
                     <StyledSubmit type="submit" fullWidth variant="contained" color="primary">
                         {isSignup ? 'Sign up' : 'Sign in'}
                     </StyledSubmit>
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        color="secondary"
-                        startIcon={<Google />} // or use a custom icon with <img src="/path/to/google-icon.svg" alt="Google icon" />
-                        onClick={() => login()}
-                        sx={{
-                            backgroundColor: '#4285F4',
-                            color: 'white',
-                            '&:hover': {
-                                backgroundColor: '#357ae8',
-                            },
-                        }}
-                    >
-                        Sign in with Google
-                    </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Button onClick={switchMode}>
