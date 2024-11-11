@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: '/api' });
+const API = axios.create({ baseURL: 'http://localhost/api' });
 
 // Add token to the request headers if the user is authenticated (use for checking middleware)
 API.interceptors.request.use((req) => {
