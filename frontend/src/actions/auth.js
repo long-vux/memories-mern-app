@@ -1,5 +1,5 @@
 import * as api from '../components/api';
-import { SIGNIN, SIGNUP } from '../constants/actionTypes';
+import { SIGNIN, SIGNUP, LOGOUT  } from '../constants/actionTypes';
 
 export const signin = (formData, navigate) => async (dispatch) => {
     try {
@@ -21,4 +21,10 @@ export const signup = (formData, navigate) => async (dispatch) => {
     } catch (error) {
         return { error: error.response.data.message };
     }
+}
+
+export const logout = () => async (dispatch) => {
+    await api.logout();
+    dispatch({ type: LOGOUT });
+    
 }

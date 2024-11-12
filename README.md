@@ -71,3 +71,5 @@ Create a .env file in the backend directory with the necessary environment varia
 - Register or log in to start creating and interacting with posts.
 
 Hello i'm vu
+
+docker swarm join --token SWMTKN-1-25kl3j6by4tmoqo9abin72l3cywrefzct7bfo2f5hec3k31phs-8wdntdkvp1as1vuyf613jdjwv 192.168.65.3:2377

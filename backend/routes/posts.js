@@ -6,11 +6,11 @@ const router = express.Router();
 
 router.get('/', getPosts);
 router.get('/search', getPostsBySearch);
-router.post('/', auth, createPost);
+router.post('/', createPost);
 router.get('/:id', getPostDetails);
-router.patch('/:id', auth, updatePost);
-router.delete('/:id', auth, deletePost);
-router.patch('/:id/likePost', auth, likePost);
+router.patch('/:id', updatePost);
+router.delete('/:id', deletePost);
+router.patch('/:id/likePost', likePost);
 router.patch('/:id/addImage', addImage);
 
 export default router;

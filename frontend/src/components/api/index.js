@@ -22,3 +22,4 @@ export const addImage = (id, image) => API.patch(`/posts/${id}/addImage`, { imag
 
 export const signin = (formData) => API.post('/user/signin', formData);
 export const signup = (formData) => API.post('/user/signup', formData);
+export const logout = () => API.post('/user/logout');
