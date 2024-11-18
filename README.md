@@ -1,75 +1,105 @@
-# Memories MERN Application
+# Memories MERN app
 
-## Overview
+## Introduction
 
-The **Memories MERN Application** is a full-stack web application built using the MERN stack (MongoDB, Express.js, ReactJS, Node.js). This application allows users to save their memories in the form of posts, view and interact with posts made by other users, and like them. It features user authentication and a responsive design, providing a seamless experience across devices.
+Welcome to **Memories MERN app**, a dynamic and feature-rich web application designed to help users manage and share their memories seamlessly. Built with a modern tech stack, Memories MERN app offers a responsive frontend, a robust backend, and reliable databases, all orchestrated using Docker. Whether you're looking to create, like, or share posts, Memories MERN app provides an intuitive interface and a scalable architecture to ensure a smooth user experience.
 
-## Features
+## Installation
 
-- **User Authentication:** Secure login and registration for users.
-- **Create, Edit, and Delete Posts:** Users can manage their own posts.
-- **Like and Comment on Posts:** Interact with posts made by other users.
-- **Responsive Design:** Optimized for various screen sizes and devices.
-- **Real-time Updates:** Posts and interactions are updated in real-time.
+1. **Clone the Repository**
 
-## Technologies Used
-
-- **Frontend:**
-  - ReactJS
-  - Redux
-  - styled-components
-  - Material-UI
-- **Backend:**
-  - Node.js
-  - Express.js
-  - MongoDB
-- **Authentication:**
-  - JSON Web Tokens (JWT)
-- **Version Control:**
-  - Git
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js and npm installed
-- MongoDB instance running
-
-### Installation
-
-1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/memories-mern-app.git
-   ```
-2.  **Navigate to the Project Directory:**
-   ```bash
+   git clone https://github.com/long-vux/memories-mern-app.git
    cd memories-mern-app
    ```
-3.  **Install Backend Dependencies:**
-   ```bash
-   cd backend
-   npm install
-   ```
-4.  **Install Frontend Dependencies:**
-   ```bash
-   cd client
-   npm install
-   ```
-## Set Up Environment Variables:
-Create a .env file in the backend directory with the necessary environment variables (e.g., MongoDB URI, JWT secret).
 
-5.  **Start the Front Server:**
-   ```bash
-   npm start
-   ```
-6.  **Start the Backend Server:**
-   ```bash
-   npm start
-   ```
-## Usage
-- Access the application by navigating to http://localhost:3000 in your web browser.
-- Register or log in to start creating and interacting with posts.
+2. **Set Up Environment Variables**
 
-Hello i'm vu
+   Create a `.env` file in the root directory and define any necessary environment variables. For example:
 
-docker swarm join --token SWMTKN-1-25kl3j6by4tmoqo9abin72l3cywrefzct7bfo2f5hec3k31phs-8wdntdkvp1as1vuyf613jdjwv 192.168.65.3:2377
+   ```env
+   MONGO_URI=mongodb://mongo_db:27017/memories
+   REDIS_URL=redis://redis:6379
+   PORT=5000
+   ```
+
+3. **Build and Start the Containers**
+
+   Use Docker Compose to build and run all services:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+   This command will:
+
+   - Build the backend and frontend Docker images.
+   - Start MongoDB, Redis, and Nginx services.
+   - Deploy the backend with 3 replicas and the frontend with 2 replicas.
+
+## Running with Docker Swarm
+
+Docker Swarm provides native clustering functionality for Docker, allowing you to deploy and manage your application across multiple nodes seamlessly. Follow the steps below to run MyApp using Docker Swarm.
+
+### 1. Initialize Docker Swarm
+
+If you haven't already initialized Docker Swarm on your machine, do so with the following command:
+```bash
+docker swarm init
+```
+   
+### 2. Deploy the Stack
+
+Use the existing `docker-compose.yml` file to deploy the stack to Docker Swarm:
+
+```bash
+docker stack deploy -c docker-compose.yml myapp-stack
+```
+
+This command will:
+
+- Deploy all services defined in the `docker-compose.yml` file as a stack named `myapp-stack`.
+- Utilize Docker Swarm's orchestration features to manage service replicas and networking.
+
+### 3. Verify the Deployment
+
+Check the status of your stack and services:
+
+```bash
+docker stack ls
+docker stack services myapp-stack
+```
+   
+You should see all services listed with the desired number of replicas running.
+
+### 4. Access the Application
+
+- **Frontend**: [http://localhost:3000](http://localhost:3000)
+- **Backend API**: [http://localhost:5000/api](http://localhost:5000/api)
+- **Nginx**: [http://localhost](http://localhost) (Proxies requests to the backend)
+
+### 5. Scaling Services
+
+You can scale services using Docker Swarm with the following command:
+
+```bash
+docker service scale myapp-stack_backend=3 myapp-stack_frontend=2
+```
+
+Replace `myapp-stack_backend` and `myapp-stack_frontend` with the actual service names if they differ.
+
+### 6. Removing the Stack
+
+To remove the deployed stack from Docker Swarm:
+
+```bash
+docker stack rm myapp-stack
+```
+
+## Conclusion
+
+This guide provides a comprehensive overview of how to install and run Memories MERN app using Docker Compose and Docker Swarm. Whether you're using Docker Compose for local development or Docker Swarm for production environments, this setup ensures a seamless and scalable deployment process. Enjoy managing your memories with Memories MERN app!
+
+<!-- ## Link to watch the instruction video
+
+- [Memories MERN app](https://www.youtube.com/watch?v=q0B1F4Zy-K8) -->
